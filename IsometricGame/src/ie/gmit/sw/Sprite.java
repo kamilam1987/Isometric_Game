@@ -13,7 +13,8 @@ package ie.gmit.sw;
 
 import java.awt.image.*;
 public class Sprite { //Sprite belongs in some sort of hierarchy....
-	private String name; //The name of the sprite
+	
+	/*private String name; //The name of the sprite
 	private BufferedImage[][] images = new BufferedImage[4][3]; //The images used in the animation 
 	private Direction direction = Direction.DOWN; //The current orientation of the sprite
 	private int index = 0; //The current image index.
@@ -88,4 +89,6 @@ public class Sprite { //Sprite belongs in some sort of hierarchy....
 			break;
 		}
 	}
+	*/
+	
 }
