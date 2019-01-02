@@ -15,6 +15,7 @@ public class Runner {
 		 * new GameWindow(); //Could be done nicer? } catch (Exception e) {
 		 * e.printStackTrace(); //Real lazy stuff here... } } }); }
 		 */
-		new GameWindow("", 1280, 640);
+		GameView gameView = new GameView("GMIT - B.Sc. in Computing (Software Development)", 1280, 640);
+		gameView.start();
 	}
 }

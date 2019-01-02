@@ -69,7 +69,8 @@ public class GameWindow {
 	}
 
 	private void createGameWindow() {
-		f = new JFrame("GMIT - B.Sc. in Computing (Software Development)");
+		f = new JFrame(title);
+		//f = new JFrame("GMIT - B.Sc. in Computing (Software Development)");
 		f.setSize(width, height);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setResizable(false);//Window with specified size that was given
@@ -77,12 +78,16 @@ public class GameWindow {
 		f.setVisible(true);
 		
 		canvas = new Canvas();
-		Dimension d = new Dimension(width,height);
-		canvas.setPreferredSize(d);
-		canvas.setMinimumSize(d);
-		canvas.setMaximumSize(d);
+		canvas.setPreferredSize(new Dimension(width, height));
+		canvas.setMaximumSize(new Dimension(width, height));
+		canvas.setMinimumSize(new Dimension(width, height));
 		f.add(canvas);
 		f.pack(); //Resize the window
 
 	}
+
+	public Canvas getCanvas() {
+		return canvas;
+	}
+	
 }

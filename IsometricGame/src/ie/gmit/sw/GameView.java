@@ -145,16 +145,34 @@ public class GameView extends JPanel implements Runnable {
 	}
 	*/
 
+	//Added a new part =========================================================//
+	
 	/**
 	 * 
 	 */
+	private GameWindow gameWindow; //gameWindow object
 	private static final long serialVersionUID = 777L;
 	private Thread thread; //Thread
 	private boolean running = false; //set to false at the start
-
-	//Added a new part =========================================================//
+	public int width, height;
+	public String title;
+	private BufferStrategy bs;
+	private Graphics g;
 	
+
+
+	//Constructor
+	public GameView(String title, int width, int height) {
+		this.width = width;
+		this.height = height;	
+		this.title = title;
+		//Initialize gameWindow in GameView constructor
+		
+	}
 	private void init() {
+		gameWindow = new GameWindow(title, width, height);
+		//testImage = ImageLoader.loadImage("/images/sprites/default/sheet.png");
+		Assets.init();
 		
 	}
 	
@@ -162,6 +180,25 @@ public class GameView extends JPanel implements Runnable {
 		
 	}
 	private void render() {
+		//source: https://docs.oracle.com/javase/9/docs/api/java/awt/image/BufferStrategy.html
+		bs = gameWindow.getCanvas().getBufferStrategy();
+		//BufferStrategy - tells computer how to draw things on the screen
+		if(bs == null) {
+			gameWindow.getCanvas().createBufferStrategy(3);
+			return;
+		}
+		g = bs.getDrawGraphics();
+		
+		//Clear
+		g.clearRect(0, 0, width, height);
+		//Draw
+		
+		g.drawImage(Assets.grass, 10, 10, null);
+		
+		//End drawing
+		bs.show();
+		g.dispose();
+		
 		
 	}
 	@Override
@@ -175,7 +212,6 @@ public class GameView extends JPanel implements Runnable {
 		stop();
 		
 	}
-	
 	
 	//Starts a thread
 	public synchronized void start() {
