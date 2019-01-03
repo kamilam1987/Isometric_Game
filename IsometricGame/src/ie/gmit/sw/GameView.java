@@ -124,6 +124,7 @@ public class GameView extends JPanel implements Runnable {
 	
 	//States
 	private State gameState;
+	private State menuState;
 
 	// Constructor
 	public GameView(String title, int width, int height) {
@@ -139,6 +140,7 @@ public class GameView extends JPanel implements Runnable {
 		// testImage = ImageLoader.loadImage("/images/sprites/default/sheet.png");
 		Assets.init();
 		gameState = new GameState();
+		menuState = new MenuState();
 		State.setState(gameState);
 
 	}
@@ -152,7 +154,7 @@ public class GameView extends JPanel implements Runnable {
 
 	}
 
-	private void render() {
+	private void paintComponent() {
 		// source:
 		// https://docs.oracle.com/javase/9/docs/api/java/awt/image/BufferStrategy.html
 		bs = gameWindow.getCanvas().getBufferStrategy();
@@ -170,7 +172,7 @@ public class GameView extends JPanel implements Runnable {
 		// AffineTransform at = AffineTransform.getShearInstance(1, 0);
 		// g2d.transform(at);
 		if(State.getState() != null) {
-			State.getState().render(g);
+			State.getState().paintComponent(g);
 		}
 
 		// End drawing
@@ -199,7 +201,7 @@ public class GameView extends JPanel implements Runnable {
 			//Check if tick and render methods needs to be call
 			if(delta >= 1) {
 				tick();
-				render();
+				paintComponent();
 				tick++;
 				delta--;
 			}

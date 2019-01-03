@@ -16,6 +16,6 @@ public abstract class State {
 		currentState = state;
 	}
 	public abstract void tick();
-	public abstract void render(Graphics g);
+	public abstract void paintComponent(Graphics g);
 
 }
