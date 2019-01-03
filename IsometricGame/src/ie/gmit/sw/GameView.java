@@ -121,6 +121,7 @@ public class GameView extends JPanel implements Runnable {
 	public String title;
 	private BufferStrategy bs;
 	private Graphics g;
+	private KeyboardInput keyboardInput;
 	
 	//States
 	private State gameState;
@@ -131,16 +132,18 @@ public class GameView extends JPanel implements Runnable {
 		this.width = width;
 		this.height = height;
 		this.title = title;
+		keyboardInput = new KeyboardInput();
 		// Initialize gameWindow in GameView constructor
 
 	}
 
 	private void init() {
 		gameWindow = new GameWindow(title, width, height);
+		gameWindow.getFrame().addKeyListener(keyboardInput);
 		// testImage = ImageLoader.loadImage("/images/sprites/default/sheet.png");
 		Assets.init();
-		gameState = new GameState();
-		menuState = new MenuState();
+		gameState = new GameState(this);//Passes instance this gameView class
+		menuState = new MenuState(this);//Passes instance this gameView class
 		State.setState(gameState);
 
 	}
@@ -148,6 +151,7 @@ public class GameView extends JPanel implements Runnable {
 
 	// Calls many times
 	private void tick() {
+		keyboardInput.tick();
 		if(State.getState() != null) {
 			State.getState().tick();
 		}
@@ -216,6 +220,10 @@ public class GameView extends JPanel implements Runnable {
 		
 	}
 
+	public KeyboardInput getKeyboardInput() {
+		return keyboardInput;
+		
+	}
 	// Starts a thread
 	public synchronized void start() {
 		if (running)

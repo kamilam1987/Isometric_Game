@@ -15,6 +15,14 @@ public abstract class State {
 	public static void setState(State state) {
 		currentState = state;
 	}
+	
+	protected GameView gameview;
+	
+	//State constructor takes a gameView object
+	public State(GameView gameview) {
+		this.gameview = gameview;
+	}
+	
 	public abstract void tick();
 	public abstract void paintComponent(Graphics g);
 

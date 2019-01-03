@@ -5,7 +5,8 @@ import java.awt.Graphics;
 public class MenuState extends State{
 
 	//Constructor
-	MenuState(){
+	MenuState(GameView gameView){
+		super(gameView);
 		
 	}
 	@Override

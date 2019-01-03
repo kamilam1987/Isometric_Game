@@ -4,14 +4,25 @@ import java.awt.Graphics;
 
 public class Player extends Human{
 
-	public Player(float x, float y) {
+	//Declare variable
+	private GameView gameView;
+	public Player(GameView gameView, float x, float y) {
 		super(x, y);
+		this.gameView = gameView;
 		
 	}
 
-	//Updates variables
+	//Updates variables or objects
 	@Override
 	public void tick() {
+		if(gameView.getKeyboardInput().up)
+			y-=3;
+		if(gameView.getKeyboardInput().down)
+			y+=3;
+		if(gameView.getKeyboardInput().left)
+			x-=3;
+		if(gameView.getKeyboardInput().right)
+			x+=3;
 		
 		
 	}

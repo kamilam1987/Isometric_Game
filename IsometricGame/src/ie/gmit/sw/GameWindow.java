@@ -81,6 +81,7 @@ public class GameWindow {
 		canvas.setPreferredSize(new Dimension(width, height));
 		canvas.setMaximumSize(new Dimension(width, height));
 		canvas.setMinimumSize(new Dimension(width, height));
+		canvas.setFocusable(false);
 		f.add(canvas);
 		f.pack(); //Resize the window
 
@@ -90,5 +91,8 @@ public class GameWindow {
 	public Canvas getCanvas() {
 		return canvas;
 	}
+	
+	public JFrame getFrame() {
+		return f;}
 	
 }
