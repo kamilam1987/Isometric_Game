@@ -121,6 +121,9 @@ public class GameView extends JPanel implements Runnable {
 	public String title;
 	private BufferStrategy bs;
 	private Graphics g;
+	
+	//States
+	private State gameState;
 
 	// Constructor
 	public GameView(String title, int width, int height) {
@@ -135,14 +138,17 @@ public class GameView extends JPanel implements Runnable {
 		gameWindow = new GameWindow(title, width, height);
 		// testImage = ImageLoader.loadImage("/images/sprites/default/sheet.png");
 		Assets.init();
+		gameState = new GameState();
+		State.setState(gameState);
 
 	}
 
-	int x = 0;
 
 	// Calls many times
 	private void tick() {
-		x += 1;
+		if(State.getState() != null) {
+			State.getState().tick();
+		}
 
 	}
 
@@ -163,7 +169,9 @@ public class GameView extends JPanel implements Runnable {
 		// Graphics2D g2d = (Graphics2D) g;
 		// AffineTransform at = AffineTransform.getShearInstance(1, 0);
 		// g2d.transform(at);
-		g.drawImage(Assets.grass, x, 10, null);
+		if(State.getState() != null) {
+			State.getState().render(g);
+		}
 
 		// End drawing
 		bs.show();
