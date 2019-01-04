@@ -12,7 +12,7 @@ public class GameState extends State{
 	public GameState(GameView gameView){
 		super(gameView);
 		player = new Player(gameView,100,100);
-		environment = new Environment("");
+		environment = new Environment("resources/environment/environment.txt");
 	}
 	
 	//Updates variables or objects
@@ -28,7 +28,7 @@ public class GameState extends State{
 	public void paintComponent(Graphics g) {
 		environment.paintComponent(g);
 		player.paintComponent(g);
-		//Tile.tiles[2].paintComponent(g, 0, 0);
+		//Tile.tiles[3].paintComponent(g, 0, 0);
 		//Tile.tiles[0].paintComponent(g, 20, 10);
 		
 		//Tile.tiles[2].paintComponent(g, 0, 0);

@@ -6,6 +6,7 @@ import java.awt.Graphics;
 public class Environment {
 	private int width, height;// Size of a map
 	private int[][] tiles;
+	private int posX, posY;// Player position
 
 	// Environment constructor takes a path of a file
 	public Environment(String path) {
@@ -29,9 +30,8 @@ public class Environment {
 	public void paintComponent(Graphics g) {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				getTile(x, y).paintComponent(g, x * Tile.TILE_WIDTH, y*Tile.TILE_HEIGHT);
-				
-				
+				getTile(x, y).paintComponent(g, x * Tile.TILE_WIDTH, y * Tile.TILE_HEIGHT);
+
 			}
 		}
 
@@ -40,16 +40,27 @@ public class Environment {
 	// Responsible for lading Environment
 	private void loadEnvironment(String path) {
 		// Testing
-		width = 5;
-		height = 5;
-		tiles = new int[width][height];
+		/*
+		 * width = 5; height = 5; tiles = new int[width][height];
+		 * 
+		 * for (int x = 0; x < width; x++) { for (int y = 0; y < height; y++) {
+		 * tiles[x][y] = 0; }
+		 * 
+		 * } }
+		 */
+		String file = Utils.loadFile(path);
+		String[] tokens = file.split("\\s");
+		width = Utils.parseInt(tokens[0]);
+		height = Utils.parseInt(tokens[1]);
+		posX = Utils.parseInt(tokens[2]);
+		posY = Utils.parseInt(tokens[3]);
 
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < width; y++) {
-				tiles[x][y] = 0;
+		tiles = new int[width][height];
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 4]);
 			}
 
 		}
 	}
-
 }
