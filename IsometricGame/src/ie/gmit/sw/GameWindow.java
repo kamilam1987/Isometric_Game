@@ -92,6 +92,7 @@ public class GameWindow {
 		return canvas;
 	}
 	
+	@SuppressWarnings("exports")
 	public JFrame getFrame() {
 		return f;}
 	

@@ -19,18 +19,21 @@ public class KeyboardInput implements KeyListener{
 		left = keys[KeyEvent.VK_LEFT];
 		right = keys[KeyEvent.VK_RIGHT];
 	}
+	@SuppressWarnings("exports")
 	@Override
 	public void keyPressed(KeyEvent e) {
 		keys[e.getKeyCode()] = true;
 		
 	}
 
+	@SuppressWarnings("exports")
 	@Override
 	public void keyReleased(KeyEvent e) {
 		keys[e.getKeyCode()] = false;
 		
 	}
 
+	@SuppressWarnings("exports")
 	@Override
 	public void keyTyped(KeyEvent e) {
 		

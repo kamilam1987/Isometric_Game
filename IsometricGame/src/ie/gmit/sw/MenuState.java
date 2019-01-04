@@ -15,6 +15,7 @@ public class MenuState extends State{
 		
 	}
 
+	@SuppressWarnings("exports")
 	@Override
 	public void paintComponent(Graphics g) {
 		// TODO Auto-generated method stub
