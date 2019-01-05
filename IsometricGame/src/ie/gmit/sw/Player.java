@@ -2,10 +2,12 @@ package ie.gmit.sw;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 public class Player extends Human {
 
 	// Declare variable
+	private PlayerAnimation anFront, anLeft, anRight, anBack;;//animation object
 
 	// Player constructor takes a gameView object and x-axis, y-axis
 	public Player(Handler handler, float x, float y) {
@@ -14,8 +16,14 @@ public class Player extends Human {
 		//Sets boundary
 		bounds.x = 50;
 		bounds.y = 50;
-		bounds.width = 64;
+		bounds.width = 15;
 		bounds.height = 15;
+		
+		//Animation
+		anFront = new PlayerAnimation(200, Assets.player_front);
+		anBack = new PlayerAnimation(200, Assets.player_back);
+		anLeft = new PlayerAnimation(200, Assets.player_left);
+		anRight = new PlayerAnimation(200, Assets.player_right);
 		
 
 	}
@@ -23,6 +31,7 @@ public class Player extends Human {
 	// Updates variables or objects
 	@Override
 	public void tick() {
+		anFront.tick();
 		getInput();
 		move();
 		handler.getCamera().centerCamera(this);
@@ -47,9 +56,20 @@ public class Player extends Human {
 	@SuppressWarnings("exports")
 	@Override
 	public void paintComponent(Graphics g) {
-		g.drawImage(Assets.player1, (int) (x - handler.getCamera().getxOffset()), (int)( y - handler.getCamera().getyOffset()), width, height, null);
-
+		g.drawImage(getCurrentAnimation(), (int) (x - handler.getCamera().getxOffset()), (int) (y - handler.getCamera().getyOffset()), width, height, null);
 		
+	}
+	
+	private BufferedImage getCurrentAnimation(){
+		if(xMove < 0){
+			return anLeft.getFrame();
+		}else if(xMove > 0){
+			return anRight.getFrame();
+		}else if(yMove < 0){
+			return anBack.getFrame();
+		}else{
+			return anFront.getFrame();
+		}
 	}
 
 }

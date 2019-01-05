@@ -144,7 +144,8 @@ public class GameView extends JPanel implements Runnable {
 		gameWindow.getFrame().addKeyListener(keyboardInput);
 		// testImage = ImageLoader.loadImage("/images/sprites/default/sheet.png");
 		Assets.init();
-		camera = new Camera(this,0, 0);// Initialise to 0,0 position
+		handler = new Handler(this);//takes gameView object
+		camera = new Camera(handler,0, 0);// Initialise to 0,0 position and pass handler
 		handler = new Handler(this);//takes gameView object
 		gameState = new GameState(handler);// Passes instance this gameView class
 		menuState = new MenuState(handler);// Passes instance this gameView class

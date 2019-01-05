@@ -19,6 +19,15 @@ public class Environment {
 	public void tick() {
 
 	}
+	
+	//Gets with of a map 
+	public int getWidth() {
+		return width;
+	}
+	//Gets height of a map
+		public int getHeight() {
+			return height;
+		}
 
 	// Finds the id in this tiles
 	public Tile getTile(int x, int y) {
