@@ -11,7 +11,9 @@ public class MenuState extends State{
 	}
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
+		//Switch to main game on two button mouse pressed
+		if(handler.getMouseInput().isLPressed() && handler.getMouseInput().isRPressed())
+			State.setState(handler.getGameView().gameState);
 		
 	}
 

@@ -124,10 +124,11 @@ public class GameView extends JPanel implements Runnable {
 	private KeyboardInput keyboardInput;// keyboardInput object
 	private Camera camera; // camera game object
 	private Handler handler;//handler object	
+	private MouseInput mouseInput;//mouse object
 
 	// States
-	private State gameState;
-	private State menuState;
+	public State gameState;
+	public State menuState;
 
 	// Constructor
 	public GameView(String title, int width, int height) {
@@ -135,6 +136,7 @@ public class GameView extends JPanel implements Runnable {
 		this.height = height;
 		this.title = title;
 		keyboardInput = new KeyboardInput();
+		mouseInput = new MouseInput();
 		// Initialize gameWindow in GameView constructor
 
 	}
@@ -142,6 +144,11 @@ public class GameView extends JPanel implements Runnable {
 	private void init() {
 		gameWindow = new GameWindow(title, width, height);
 		gameWindow.getFrame().addKeyListener(keyboardInput);
+		gameWindow.getFrame().addMouseListener(mouseInput);
+		gameWindow.getFrame().addMouseMotionListener(mouseInput);
+		gameWindow.getCanvas().addMouseListener(mouseInput);
+		gameWindow.getCanvas().addMouseMotionListener(mouseInput);
+		
 		// testImage = ImageLoader.loadImage("/images/sprites/default/sheet.png");
 		Assets.init();
 		handler = new Handler(this);//takes gameView object
@@ -149,7 +156,7 @@ public class GameView extends JPanel implements Runnable {
 		handler = new Handler(this);//takes gameView object
 		gameState = new GameState(handler);// Passes instance this gameView class
 		menuState = new MenuState(handler);// Passes instance this gameView class
-		State.setState(gameState);
+		State.setState(menuState);
 
 	}
 
@@ -227,6 +234,9 @@ public class GameView extends JPanel implements Runnable {
 
 	public KeyboardInput getKeyboardInput() {
 		return keyboardInput;
+	}
+	public MouseInput getMouseInput() {
+		return mouseInput;
 	}
 
 	// Getter that return game camera object

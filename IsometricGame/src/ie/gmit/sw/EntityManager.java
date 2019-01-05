@@ -9,17 +9,6 @@ public class EntityManager {
 	private Handler handler;// handler object
 	private Player player;// player object
 	private ArrayList<Entity> entities;// list of entities
-	private Comparator<Entity> sorter = new Comparator<Entity>() {
-
-		@Override
-		public int compare(Entity first, Entity second) {
-			// Sort entity and checks which entity should be render first
-			if (first.getY() + first.getHeight()< second.getY() + second.getHeight())
-				return -1;
-			return 1;
-		}
-
-	};// Compares entity
 
 	public EntityManager(Handler handler, Player player) {
 		this.handler = handler;
@@ -35,7 +24,7 @@ public class EntityManager {
 			e.tick();
 		}
 		// player.tick();
-		//Sort entities array
+		// Sort entities array
 		entities.sort(sorter);
 
 	}
@@ -77,5 +66,17 @@ public class EntityManager {
 		entities.add(e);
 
 	}
+
+	private Comparator<Entity> sorter = new Comparator<Entity>() {
+
+		@Override
+		public int compare(Entity first, Entity second) {
+			// Sort entity and checks which entity should be render first
+			if (first.getY() + first.getHeight() < second.getY() + second.getHeight())
+				return -1;
+			return 1;
+		}
+
+	};// Compares entity
 
 }

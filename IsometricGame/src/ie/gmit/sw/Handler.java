@@ -27,18 +27,25 @@ public class Handler {
 	public void setEnvironment(Environment environment) {
 		this.environment = environment;
 	}
-	
+
 	public int getWidth() {
 		return gameView.getWidth();
 	}
+
 	public int getHeight() {
 		return gameView.getHeight();
 	}
+
 	public KeyboardInput getKeybordInput() {
 		return gameView.getKeyboardInput();
 	}
+
 	public Camera getCamera() {
 		return gameView.getCamera();
+	}
+
+	public MouseInput getMouseInput() {
+		return gameView.getMouseInput();
 	}
 
 }
