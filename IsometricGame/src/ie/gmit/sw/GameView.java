@@ -117,13 +117,15 @@ public class GameView extends JPanel implements Runnable {
 	private static final long serialVersionUID = 777L;
 	private Thread thread; // Thread
 	private boolean running = false; // set to false at the start
-	public int width, height;
+	private int width, height;
 	public String title;
 	private BufferStrategy bs;
-	private Graphics g;
-	private KeyboardInput keyboardInput;
-	
-	//States
+	private Graphics g;// Graphics object
+	private KeyboardInput keyboardInput;// keyboardInput object
+	private Camera camera; // camera game object
+	private Handler handler;//handler object	
+
+	// States
 	private State gameState;
 	private State menuState;
 
@@ -142,17 +144,18 @@ public class GameView extends JPanel implements Runnable {
 		gameWindow.getFrame().addKeyListener(keyboardInput);
 		// testImage = ImageLoader.loadImage("/images/sprites/default/sheet.png");
 		Assets.init();
-		gameState = new GameState(this);//Passes instance this gameView class
-		menuState = new MenuState(this);//Passes instance this gameView class
+		camera = new Camera(this,0, 0);// Initialise to 0,0 position
+		handler = new Handler(this);//takes gameView object
+		gameState = new GameState(handler);// Passes instance this gameView class
+		menuState = new MenuState(handler);// Passes instance this gameView class
 		State.setState(gameState);
 
 	}
 
-
 	// Calls many times
 	private void tick() {
 		keyboardInput.tick();
-		if(State.getState() != null) {
+		if (State.getState() != null) {
 			State.getState().tick();
 		}
 
@@ -175,7 +178,7 @@ public class GameView extends JPanel implements Runnable {
 		// Graphics2D g2d = (Graphics2D) g;
 		// AffineTransform at = AffineTransform.getShearInstance(1, 0);
 		// g2d.transform(at);
-		if(State.getState() != null) {
+		if (State.getState() != null) {
 			State.getState().paintComponent(g);
 		}
 
@@ -187,43 +190,58 @@ public class GameView extends JPanel implements Runnable {
 
 	public void run() {
 		init();
-		
-		//Runs in the same speed at every computer
-		int fps = 60;//Frames per sec, amount of time that tick and render method runs
-		double timePerTick = 1000000000 / fps;//(NanoTime) Max amount of time allow to have to run tick and render method to achieve 60 frame/sec
-		double delta = 0;//Amount time before call tick and render method
-		long now;//Current time of a coputer
+
+		// Runs in the same speed at every computer
+		int fps = 60;// Frames per sec, amount of time that tick and render method runs
+		double timePerTick = 1000000000 / fps;// (NanoTime) Max amount of time allow to have to run tick and render
+												// method to achieve 60 frame/sec
+		double delta = 0;// Amount time before call tick and render method
+		long now;// Current time of a coputer
 		long lastTime = System.nanoTime();// Current time in nano sec
 		long timer = 0;
 		int tick = 0;
-		
-		while(running) {
+
+		while (running) {
 			now = System.nanoTime();
-			delta += (now - lastTime)/timePerTick;//Amount of time to call tick and render method
-			timer += now - lastTime;//Adds the amount of time that is passed since code above last ran
-			lastTime = now;//current time
-			//Check if tick and render methods needs to be call
-			if(delta >= 1) {
+			delta += (now - lastTime) / timePerTick;// Amount of time to call tick and render method
+			timer += now - lastTime;// Adds the amount of time that is passed since code above last ran
+			lastTime = now;// current time
+			// Check if tick and render methods needs to be call
+			if (delta >= 1) {
 				tick();
 				paintComponent();
 				tick++;
 				delta--;
 			}
-			if(timer >= 1000000000) {
-				System.out.println("Tick and frames"+ tick);//Amount of tick
+			if (timer >= 1000000000) {
+				System.out.println("Tick and frames" + tick);// Amount of tick
 				tick = 0;
 				timer = 0;
 			}
 		}
-		
+
 		stop();
-		
+
 	}
 
 	public KeyboardInput getKeyboardInput() {
 		return keyboardInput;
-		
 	}
+
+	// Getter that return game camera object
+	public Camera getCamera() {
+		return camera;
+	}
+	
+	//Getters for width and height
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+
 	// Starts a thread
 	public synchronized void start() {
 		if (running)

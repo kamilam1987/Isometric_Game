@@ -1,16 +1,22 @@
 package ie.gmit.sw;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Player extends Human {
 
 	// Declare variable
-	private GameView gameView;// GameView object
 
 	// Player constructor takes a gameView object and x-axis, y-axis
-	public Player(GameView gameView, float x, float y) {
-		super(x, y, Human.DEFAULT_HUMAN_WIDTH, Human.DEFAULT_HUMAN_WIDTH);
-		this.gameView = gameView;
+	public Player(Handler handler, float x, float y) {
+		super(handler, x, y, Human.DEFAULT_HUMAN_WIDTH, Human.DEFAULT_HUMAN_HEIGHT);
+		
+		//Sets boundary
+		bounds.x = 50;
+		bounds.y = 50;
+		bounds.width = 64;
+		bounds.height = 15;
+		
 
 	}
 
@@ -19,6 +25,7 @@ public class Player extends Human {
 	public void tick() {
 		getInput();
 		move();
+		handler.getCamera().centerCamera(this);
 
 	}
 
@@ -26,13 +33,13 @@ public class Player extends Human {
 		xMove = 0;
 		yMove = 0;
 
-		if (gameView.getKeyboardInput().up)
+		if (handler.getKeybordInput().up)
 			yMove = -speed;
-		if (gameView.getKeyboardInput().down)
+		if (handler.getKeybordInput().down)
 			yMove = speed;
-		if (gameView.getKeyboardInput().left)
+		if (handler.getKeybordInput().left)
 			xMove = -speed;
-		if (gameView.getKeyboardInput().right)
+		if (handler.getKeybordInput().right)
 			xMove = speed;
 	}
 
@@ -40,8 +47,9 @@ public class Player extends Human {
 	@SuppressWarnings("exports")
 	@Override
 	public void paintComponent(Graphics g) {
-		g.drawImage(Assets.player1, (int) x, (int) y, width, height, null);
+		g.drawImage(Assets.player1, (int) (x - handler.getCamera().getxOffset()), (int)( y - handler.getCamera().getyOffset()), width, height, null);
 
+		
 	}
 
 }

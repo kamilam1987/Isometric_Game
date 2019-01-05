@@ -1,5 +1,6 @@
 package ie.gmit.sw;
 
+//Collision detection 
 public abstract class Human extends Entity {
 
 	// Declare variables
@@ -13,21 +14,78 @@ public abstract class Human extends Entity {
 	public static final int DEFAULT_HUMAN_HEIGHT = 64;
 
 	// Human constructor that takes x,y position
-	public Human(float x, float y, int width, int height) {
-		super(x, y, width, height);
+	public Human(Handler handler, float x, float y, int width, int height) {
+		super(handler, x, y, width, height);
 		health = DEFAULT_HEALTH;
 		speed = DEFAULT_SPEED;
 		xMove = 0;
 		yMove = 0;
 	}
-	
+
 	public void move() {
-		x+=xMove;
-		y+=yMove;
+		moveX();
+		moveY();
+
+	}
+
+	// Collision detection
+	// Move only on x-axis
+	public void moveX() {
+		// Player moving right
+		if(xMove > 0){//Moving right
+int tx = (int) (x + xMove + bounds.x + bounds.width) / Tile.TILE_WIDTH;
+			
+			if(!collisionWithWater(tx, (int) (y + bounds.y) / Tile.TILE_HEIGHT) &&
+					!collisionWithWater(tx, (int) (y + bounds.y + bounds.height) / Tile.TILE_HEIGHT)){
+				x += xMove;
+			}else{
+				x = tx * Tile.TILE_WIDTH - bounds.x - bounds.width - 1;
+			}
+			
+		}else if(xMove < 0){//Moving left
+			int tx = (int) (x + xMove + bounds.x) / Tile.TILE_WIDTH;
+			
+			if(!collisionWithWater(tx, (int) (y + bounds.y) / Tile.TILE_HEIGHT) &&
+					!collisionWithWater(tx, (int) (y + bounds.y + bounds.height) / Tile.TILE_HEIGHT)){
+				x += xMove;
+			}else{
+				x = tx * Tile.TILE_WIDTH + Tile.TILE_WIDTH - bounds.x;
+			}
+			
+		}
+	}
+
+	// Move only on y-axis
+	public void moveY() {
+		if(yMove < 0){//Up
+			int ty = (int) (y + yMove + bounds.y) / Tile.TILE_HEIGHT;
+			
+			if(!collisionWithWater((int) (x + bounds.x) / Tile.TILE_WIDTH, ty) &&
+					!collisionWithWater((int) (x + bounds.x + bounds.width) / Tile.TILE_WIDTH, ty)){
+				y += yMove;
+			}else{
+				y = ty * Tile.TILE_HEIGHT + Tile.TILE_HEIGHT - bounds.y;
+			}
+			
+		}else if(yMove > 0){//Down
+			int ty = (int) (y + yMove + bounds.y + bounds.height) / Tile.TILE_HEIGHT;
+			
+			if(!collisionWithWater((int) (x + bounds.x) / Tile.TILE_WIDTH, ty) &&
+					!collisionWithWater((int) (x + bounds.x + bounds.width) / Tile.TILE_WIDTH, ty)){
+				y += yMove;
+			}else{
+				y = ty * Tile.TILE_HEIGHT - bounds.y - bounds.height - 1;
+			}
+			
+		}
 	}
 
 	public int getHealth() {
 		return health;
+	}
+
+	protected boolean collisionWithWater(int x, int y) {
+		return handler.getEnvironment().getTile(x, y).isSolid();
 	}
 
 	public void setHealth(int health) {

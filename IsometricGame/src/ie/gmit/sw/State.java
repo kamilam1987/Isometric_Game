@@ -16,11 +16,12 @@ public abstract class State {
 		currentState = state;
 	}
 	
-	protected GameView gameview;
+	//protected GameView gameView;
+	protected Handler handler;
 	
 	//State constructor takes a gameView object
-	public State(GameView gameview) {
-		this.gameview = gameview;
+	public State(Handler handler) {
+		this.handler = handler;
 	}
 	
 	public abstract void tick();

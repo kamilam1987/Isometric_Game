@@ -9,10 +9,13 @@ public class GameState extends State{
 	private Environment environment;
 
 	//Constructor
-	public GameState(GameView gameView){
-		super(gameView);
-		player = new Player(gameView,100,100);
-		environment = new Environment("resources/environment/environment.txt");
+	public GameState(Handler handler){
+		super(handler);
+		environment = new Environment(handler, "resources/environment/environment.txt");
+		handler.setEnvironment(environment);
+		player = new Player(handler,100,100);
+		
+		//gameView.getCamera().move(50, 100);//Takes x,y offsets to move a camera
 	}
 	
 	//Updates variables or objects
@@ -20,6 +23,7 @@ public class GameState extends State{
 	public void tick() {
 		environment.tick();
 		player.tick();
+		//gameView.getCamera().move(1, 1 );//Moves camera by x,y axis
 		
 	}
 

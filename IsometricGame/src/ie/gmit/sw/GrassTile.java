@@ -8,9 +8,5 @@ public class GrassTile extends Tile {
 		super(Assets.grass, id);
 	}
 
-	public int getId() {
-		return id;
-
-	}
 
 }
