@@ -53,6 +53,24 @@ public abstract class Entity {
 	public void setHeight(int height) {
 		this.height = height;
 	}
+	
+	public Rectangle getCollisionBounds(float xOff, float yOff) {
+		//returns rectangle with area around the entity
+		return new Rectangle ((int)(x + bounds.x + xOff), (int)(y + bounds.y + yOff),bounds.width, bounds.height);
+		
+	}
+	
+	//Check for collision with entity
+	public boolean collision(float xOff, float yOff) {
+		for(Entity e : handler.getEnvironment().getEntityManager().getEntities()) {
+			if(e.equals(this))
+				continue;
+			if(e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds( xOff,  yOff)))
+				return true;
+		}
+		return false;
+		
+	}
 
 	// Updates variables
 	public abstract void tick();

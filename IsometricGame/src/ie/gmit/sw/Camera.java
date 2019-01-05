@@ -28,27 +28,17 @@ public class Camera {
 		this.yOffset = yOffset;
 	}
 
-	
-	
-
-	
-		
-		
-
-	
-
 	// Centre camera on the player
 	public void centerCamera(Entity e) {
 		xOffset = e.getX() - handler.getWidth() / 2 + e.getWidth() / 2;
 		yOffset = e.getY() - handler.getHeight() / 2 + e.getHeight() / 2;
-		
 
 	}
-	
+
 	public void move(float xAmt, float yAmt) {
 		xOffset += xAmt;
 		yOffset += yAmt;
-		
+
 	}
 
 }

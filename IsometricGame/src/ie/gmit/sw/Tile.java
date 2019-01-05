@@ -9,8 +9,8 @@ public class Tile {
 	public static Tile[] tiles = new Tile[256];
 	public static Tile grassTile = new GrassTile(0);
 	public static Tile waterTile = new WaterTile(1);
-	public static Tile threeTile = new ThreeTile(2);
-	public static Tile chestTile = new ChestTile(3);
+	
+	
 	
 	protected BufferedImage texture;
 	protected final int id;

@@ -13,7 +13,7 @@ public class Player extends Human {
 	public Player(Handler handler, float x, float y) {
 		super(handler, x, y, Human.DEFAULT_HUMAN_WIDTH, Human.DEFAULT_HUMAN_HEIGHT);
 		
-		//Sets boundary
+		//Sets boundary for player collision
 		bounds.x = 50;
 		bounds.y = 50;
 		bounds.width = 15;

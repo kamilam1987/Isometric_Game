@@ -8,15 +8,30 @@ public class Environment {
 	private int[][] tiles;
 	private int posX, posY;// Player position
 	private Handler handler; //handler object
+	private EntityManager entityManager;
 
 	// Environment constructor takes a path of a file
 	public Environment(Handler handler, String path) {
 		this.handler = handler;
+		entityManager = new EntityManager(handler, new Player(handler, 100, 100));
+		entityManager.add(new Tree(handler, 500,100));
+		entityManager.add(new Tree(handler, 300,300));
+		entityManager.add(new Tree(handler, 300,500));
 		loadEnvironment(path);
+		entityManager.getPlayer().setX(posX);
+		entityManager.getPlayer().setY(posY);
+		
 	}
+	
+
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
 
 	// Updates position of a tiles
 	public void tick() {
+		entityManager.tick();
 
 	}
 	
@@ -53,6 +68,7 @@ public class Environment {
 
 			}
 		}
+		entityManager.paintComponent(g);
 
 	}
 

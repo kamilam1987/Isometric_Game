@@ -23,8 +23,10 @@ public abstract class Human extends Entity {
 	}
 
 	public void move() {
-		moveX();
-		moveY();
+		if (!collision(xMove, 0f))
+			moveX();
+		if (!collision(0f, yMove))
+			moveY();
 
 	}
 
@@ -32,51 +34,51 @@ public abstract class Human extends Entity {
 	// Move only on x-axis
 	public void moveX() {
 		// Player moving right
-		if(xMove > 0){//Moving right
-int tx = (int) (x + xMove + bounds.x + bounds.width) / Tile.TILE_WIDTH;
-			
-			if(!collisionWithWater(tx, (int) (y + bounds.y) / Tile.TILE_HEIGHT) &&
-					!collisionWithWater(tx, (int) (y + bounds.y + bounds.height) / Tile.TILE_HEIGHT)){
+		if (xMove > 0) {// Moving right
+			int tx = (int) (x + xMove + bounds.x + bounds.width) / Tile.TILE_WIDTH;
+
+			if (!collisionWithWater(tx, (int) (y + bounds.y) / Tile.TILE_HEIGHT)
+					&& !collisionWithWater(tx, (int) (y + bounds.y + bounds.height) / Tile.TILE_HEIGHT)) {
 				x += xMove;
-			}else{
+			} else {
 				x = tx * Tile.TILE_WIDTH - bounds.x - bounds.width - 1;
 			}
-			
-		}else if(xMove < 0){//Moving left
+
+		} else if (xMove < 0) {// Moving left
 			int tx = (int) (x + xMove + bounds.x) / Tile.TILE_WIDTH;
-			
-			if(!collisionWithWater(tx, (int) (y + bounds.y) / Tile.TILE_HEIGHT) &&
-					!collisionWithWater(tx, (int) (y + bounds.y + bounds.height) / Tile.TILE_HEIGHT)){
+
+			if (!collisionWithWater(tx, (int) (y + bounds.y) / Tile.TILE_HEIGHT)
+					&& !collisionWithWater(tx, (int) (y + bounds.y + bounds.height) / Tile.TILE_HEIGHT)) {
 				x += xMove;
-			}else{
+			} else {
 				x = tx * Tile.TILE_WIDTH + Tile.TILE_WIDTH - bounds.x;
 			}
-			
+
 		}
 	}
 
 	// Move only on y-axis
 	public void moveY() {
-		if(yMove < 0){//Up
+		if (yMove < 0) {// Up
 			int ty = (int) (y + yMove + bounds.y) / Tile.TILE_HEIGHT;
-			
-			if(!collisionWithWater((int) (x + bounds.x) / Tile.TILE_WIDTH, ty) &&
-					!collisionWithWater((int) (x + bounds.x + bounds.width) / Tile.TILE_WIDTH, ty)){
+
+			if (!collisionWithWater((int) (x + bounds.x) / Tile.TILE_WIDTH, ty)
+					&& !collisionWithWater((int) (x + bounds.x + bounds.width) / Tile.TILE_WIDTH, ty)) {
 				y += yMove;
-			}else{
+			} else {
 				y = ty * Tile.TILE_HEIGHT + Tile.TILE_HEIGHT - bounds.y;
 			}
-			
-		}else if(yMove > 0){//Down
+
+		} else if (yMove > 0) {// Down
 			int ty = (int) (y + yMove + bounds.y + bounds.height) / Tile.TILE_HEIGHT;
-			
-			if(!collisionWithWater((int) (x + bounds.x) / Tile.TILE_WIDTH, ty) &&
-					!collisionWithWater((int) (x + bounds.x + bounds.width) / Tile.TILE_WIDTH, ty)){
+
+			if (!collisionWithWater((int) (x + bounds.x) / Tile.TILE_WIDTH, ty)
+					&& !collisionWithWater((int) (x + bounds.x + bounds.width) / Tile.TILE_WIDTH, ty)) {
 				y += yMove;
-			}else{
+			} else {
 				y = ty * Tile.TILE_HEIGHT - bounds.y - bounds.height - 1;
 			}
-			
+
 		}
 	}
 
