@@ -2,12 +2,24 @@ package ie.gmit.sw;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class EntityManager {
 
 	private Handler handler;// handler object
 	private Player player;// player object
 	private ArrayList<Entity> entities;// list of entities
+	private Comparator<Entity> sorter = new Comparator<Entity>() {
+
+		@Override
+		public int compare(Entity first, Entity second) {
+			// Sort entity and checks which entity should be render first
+			if (first.getY() + first.getHeight()< second.getY() + second.getHeight())
+				return -1;
+			return 1;
+		}
+
+	};// Compares entity
 
 	public EntityManager(Handler handler, Player player) {
 		this.handler = handler;
@@ -18,19 +30,21 @@ public class EntityManager {
 	}
 
 	public void tick() {
-		for (int i=0; i<entities.size(); i++) {
+		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
 			e.tick();
 		}
-		//player.tick();
+		// player.tick();
+		//Sort entities array
+		entities.sort(sorter);
 
 	}
 
 	public void paintComponent(Graphics g) {
-		for (Entity e: entities ) {
+		for (Entity e : entities) {
 			e.paintComponent(g);
 		}
-		//player.paintComponent(g);
+		// player.paintComponent(g);
 
 	}
 
@@ -57,11 +71,11 @@ public class EntityManager {
 	public void setEntities(ArrayList<Entity> entities) {
 		this.entities = entities;
 	}
-	
-	//Adss entity to ArrayList
+
+	// Adss entity to ArrayList
 	public void add(Entity e) {
 		entities.add(e);
-		
+
 	}
 
 }
