@@ -1,5 +1,7 @@
 package ie.gmit.sw;
 
+import ie.gmit.sw.view.GameView;
+
 public class Runner {
 	public static void main(String[] args) {
 		/*

@@ -1,6 +1,10 @@
 package ie.gmit.sw;
 
+import ie.gmit.sw.camera.Camera;
 import ie.gmit.sw.environment.Environment;
+import ie.gmit.sw.listener.KeyboardInput;
+import ie.gmit.sw.listener.MouseInput;
+import ie.gmit.sw.view.GameView;
 
 //Allows to pass handler object and allows to access any object that are needed
 public class Handler {

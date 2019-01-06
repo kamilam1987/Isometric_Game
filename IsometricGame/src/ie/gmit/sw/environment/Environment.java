@@ -2,12 +2,12 @@ package ie.gmit.sw.environment;
 
 import java.awt.Graphics;
 
-import ie.gmit.sw.EntityManager;
 import ie.gmit.sw.Handler;
-import ie.gmit.sw.Player;
-import ie.gmit.sw.Tile;
-import ie.gmit.sw.Tree;
-import ie.gmit.sw.Utils;
+import ie.gmit.sw.sprites.entities.EntityManager;
+import ie.gmit.sw.sprites.entities.Player;
+import ie.gmit.sw.sprites.entities.Tree;
+import ie.gmit.sw.tiles.Tile;
+import ie.gmit.sw.utils.Utils;
 
 //Loading Environment from a file
 public class Environment {
