@@ -1,5 +1,7 @@
 package ie.gmit.sw;
 
+import ie.gmit.sw.environment.Environment;
+
 //Allows to pass handler object and allows to access any object that are needed
 public class Handler {
 

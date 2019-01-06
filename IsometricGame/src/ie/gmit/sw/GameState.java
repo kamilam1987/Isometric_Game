@@ -2,6 +2,8 @@ package ie.gmit.sw;
 
 import java.awt.Graphics;
 
+import ie.gmit.sw.environment.Environment;
+
 public class GameState extends State {
 
 	// Declare variables
