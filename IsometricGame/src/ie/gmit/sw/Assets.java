@@ -20,11 +20,13 @@ public class Assets {
 	public static BufferedImage chest;
 	public static BufferedImage water;
 	public static BufferedImage three;
+	public static BufferedImage[] start_button;
 	
 
 	// Loads everything for the game
 	public static void init() {
 		Sprite sheet = new Sprite(ImageLoader.loadImage("/images/sprites/default/sheet.png"));
+		
 		//player1 = ImageLoader.loadImage("/images/sprites/person/0003.png");
 		grass = ImageLoader.loadImage("/images/ground/0000.png");
 		chest = ImageLoader.loadImage("/images/objects/0003.png");
@@ -48,6 +50,9 @@ public class Assets {
 		player_back[1] = ImageLoader.loadImage("/images/sprites/person/0001.png");
 		player_back[2] = ImageLoader.loadImage("/images/sprites/person/0002.png");
 		
+		start_button = new BufferedImage[2];
+		start_button[0]= ImageLoader.loadImage("/images/sprites/default/start1.png");
+		start_button[1]= ImageLoader.loadImage("/images/sprites/default/start2.png");
 		
 		
 		player = sheet.crop(0, 0, width, height);
@@ -55,6 +60,7 @@ public class Assets {
 		//grass = sheet.crop(width * 2, 0, width, height);
 		stone = sheet.crop(width * 3, 0, width, height);
 		tree = sheet.crop(0, height, width, height);
+		
 
 	}
 

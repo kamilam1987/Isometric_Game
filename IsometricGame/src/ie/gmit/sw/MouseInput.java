@@ -8,9 +8,14 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 	// Declare variables
 	private int x, y;
 	private boolean left, right;
+	private UIController uIController;
 
 	MouseInput() {
 
+	}
+
+	public void setUIController(UIController uIController) {
+		this.uIController = uIController;
 	}
 
 	@Override
@@ -23,6 +28,10 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 	public void mouseMoved(MouseEvent e) {
 		x = e.getX();
 		y = e.getY();
+
+		// Checks if uIController exists
+		if (uIController != null)
+			uIController.onMouseMove(e);
 
 	}
 
@@ -63,6 +72,9 @@ public class MouseInput implements MouseListener, MouseMotionListener {
 		// Right mouse button
 		else if (e.getButton() == MouseEvent.BUTTON3)
 			right = false;
+		// Checks if uIController exists
+		if (uIController != null)
+			uIController.onMouseRelease(e);
 
 	}
 

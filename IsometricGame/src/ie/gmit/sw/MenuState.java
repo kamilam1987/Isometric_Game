@@ -2,26 +2,41 @@ package ie.gmit.sw;
 
 import java.awt.Graphics;
 
-public class MenuState extends State{
+public class MenuState extends State {
 
-	//Constructor
-	MenuState(Handler handler){
+	private UIController uIController;
+
+	// Constructor
+	MenuState(Handler handler) {
 		super(handler);
+		this.uIController = new UIController(handler);
+		handler.getMouseInput().setUIController(uIController);
+
+		//Adds start button
+		uIController.addObj(new UIStartButton(200, 200, 250, 120, Assets.start_button, new ClickListener() {
+			
 		
+			@Override
+			public void click() {
+				handler.getMouseInput().setUIController(null);
+				State.setState(handler.getGameView().gameState);
+
+			}
+		}));
+
 	}
+
 	@Override
 	public void tick() {
-		//Switch to main game on two button mouse pressed
-		if(handler.getMouseInput().isLPressed() && handler.getMouseInput().isRPressed())
-			State.setState(handler.getGameView().gameState);
-		
+		uIController.tick();
+
 	}
 
 	@SuppressWarnings("exports")
 	@Override
 	public void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		uIController.paintComponent(g);
+
 	}
 
 }
