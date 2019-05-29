@@ -4,12 +4,23 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
+/**
+ * Creates game menu screen
+ * @author Kamilka
+ *
+ */
 public abstract class UserInterface {
 	protected float x, y;
 	protected int width, height;
 	protected boolean hover = false;
 	protected Rectangle bounds;
 
+	/**
+	 * @param x position of a game menu
+	 * @param y position of a game menu
+	 * @param width of a game menu in pixels
+	 * @param height of a game menu in pixels
+	 */
 	public UserInterface(float x, float y, int width, int height) {
 		this.x = x;
 		this.y = y;

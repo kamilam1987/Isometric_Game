@@ -6,8 +6,17 @@ import java.awt.event.MouseMotionListener;
 
 import ie.gmit.sw.ui.UIController;
 
+/**
+ * Controls start button on the menu state screen.
+ * After pressing the start button, the state of the game from the state menu switches to game state.
+ * @author Kamila Michel
+ *
+ */
 public class MouseInput implements MouseListener, MouseMotionListener {
-	// Declare variables
+	
+	/**
+	 * Declare variables 
+	 */
 	private int x, y;
 	private boolean left, right;
 	private UIController uIController;

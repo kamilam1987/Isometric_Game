@@ -4,7 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-//Reads the file with environment
+/**
+ * Returns text file with created environment.
+ * Loops every line in file and checks the id number for each tile.
+ * @author Kamila
+ *
+ */
 public class Utils {
 
 	public static String loadFile(String path) {
@@ -24,7 +29,10 @@ public class Utils {
 		return sb.toString();
 
 	}
-	
+	/**
+	 * @param number Takes string and converts it to the number for each tile
+	 * @return default number
+	 */
 	public static int parseInt(String number) {
 		try {
 			return Integer.parseInt(number);

@@ -8,6 +8,13 @@ import ie.gmit.sw.ui.UIController;
 import ie.gmit.sw.ui.UIStartButton;
 import ie.gmit.sw.utils.Assets;
 
+/**
+ * Returns start button to the menu screen on mouse click Changes state from
+ * menu state to game state
+ * 
+ * @author Kamilka
+ *
+ */
 public class MenuState extends State {
 
 	private UIController uIController;
@@ -19,6 +26,10 @@ public class MenuState extends State {
 		handler.getMouseInput().setUIController(uIController);
 
 		// Adds start button
+
+		/**
+		 * Switches to game state when user press on the start button
+		 */
 		uIController.addObj(new UIStartButton(200, 200, 250, 120, Assets.start_button, new ClickListener() {
 
 			@Override

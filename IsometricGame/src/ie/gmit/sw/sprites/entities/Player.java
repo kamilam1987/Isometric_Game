@@ -8,16 +8,28 @@ import ie.gmit.sw.Handler;
 import ie.gmit.sw.animation.PlayerAnimation;
 import ie.gmit.sw.utils.Assets;
 
+// 
+//
+/**
+ * Returns animated player character.
+ * Controls position of a player using arrow key form keyboard input.
+ * Takes image for animation from assets class.
+ * Sets boundary for player collision with other entity
+ * @author Kamilka
+ *
+ */
 public class Player extends Human {
 
-	// Declare variable
 	private PlayerAnimation anFront, anLeft, anRight, anBack;;//animation object
 
-	// Player constructor takes a gameView object and x-axis, y-axis
+	/**
+	 * @param handler object
+	 * @param x axis position of a player on the map
+	 * @param y axis position of a player on the map
+	 */
 	public Player(Handler handler, float x, float y) {
 		super(handler, x, y, Human.DEFAULT_HUMAN_WIDTH, Human.DEFAULT_HUMAN_HEIGHT);
 		
-		//Sets boundary for player collision
 		bounds.x = 50;
 		bounds.y = 50;
 		bounds.width = 15;
@@ -32,7 +44,9 @@ public class Player extends Human {
 
 	}
 
-	// Updates variables or objects
+	/**
+	 * Updates move position of a player after arrow pressing keyboard 
+	 */
 	@Override
 	public void tick() {
 		anFront.tick();
@@ -42,6 +56,9 @@ public class Player extends Human {
 
 	}
 
+	/**
+	 * Sets speed and direction for player movement using keyboar input
+	 */
 	private void getInput() {
 		xMove = 0;
 		yMove = 0;
@@ -56,7 +73,9 @@ public class Player extends Human {
 			xMove = speed;
 	}
 
-	// Draws to the screen
+	/**
+	 * Draws animated player
+	 */
 	@SuppressWarnings("exports")
 	@Override
 	public void paintComponent(Graphics g) {
@@ -64,6 +83,9 @@ public class Player extends Human {
 		
 	}
 	
+	/**
+	 * @return animation frame depends on player move direction
+	 */
 	private BufferedImage getCurrentAnimation(){
 		if(xMove < 0){
 			return anLeft.getFrame();

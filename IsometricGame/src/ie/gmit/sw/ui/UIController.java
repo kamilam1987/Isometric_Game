@@ -6,21 +6,36 @@ import java.util.ArrayList;
 
 import ie.gmit.sw.Handler;
 
+/**
+ * Handles user interface objects 
+ * Checks mouse click events
+ * @author Kamilka
+ *
+ */
 public class UIController {
 
 	private Handler handler;
 	private ArrayList<UserInterface> obj;
 	
+	/**
+	 * @param handler object
+	 */
 	public UIController(Handler handler) {
 		this.handler = handler;
 		obj = new ArrayList<UserInterface>();
 	}
 	
+	/**
+	 * Loop thought objects and updates them
+	 */
 	public void tick() {
 		for(UserInterface o: obj)
 			o.tick();
 	}
 	
+	/**
+	 * Loop thought objects and paint them on the screen
+	 */
 	public void paintComponent(Graphics g) {
 		for(UserInterface o: obj)
 			o.paintComponent(g);

@@ -5,15 +5,25 @@ import java.awt.Rectangle;
 
 import ie.gmit.sw.Handler;
 
+/**
+ * Returns position and size of entity. Checks for collision between player and entities.
+ * @author Kamilka
+ *
+ */
 public abstract class Entity {
 
-	// Declare variables
-	protected Handler handler;// handler object
-	protected float x, y;// position on the screen
-	protected int width, height;// Entity size
-	protected Rectangle bounds;// Collision bounds
+	protected Handler handler;
+	protected float x, y;
+	protected int width, height;
+	protected Rectangle bounds;
 
-	// Constructor takes x-axis and y-axis
+	/**
+	 * @param handler helper object
+	 * @param x axis position on the screen
+	 * @param y axis position on the screen
+	 * @param width Entity width in pixels
+	 * @param height Entity height in pixels
+	 */
 	public Entity(Handler handler, float x, float y, int width, int height) {
 		this.handler = handler;
 		this.x = x;
@@ -21,9 +31,15 @@ public abstract class Entity {
 		this.width = width;
 		this.height = height;
 		
-		bounds = new Rectangle(0,0,width, height);// Takes x,y position of a player and width and height of the player
+		/**
+		 * Takes x,y position of a player and width and height of the player
+		 */
+		bounds = new Rectangle(0,0,width, height);
 	}
-
+ 
+	/**
+	 * @return player x-axis on the screen
+	 */
 	public float getX() {
 		return x;
 	}
@@ -31,7 +47,10 @@ public abstract class Entity {
 	public void setX(float x) {
 		this.x = x;
 	}
-
+ 
+	/**
+	 * @return entity y-axis on the screen
+	 */
 	public float getY() {
 		return y;
 	}
@@ -40,6 +59,9 @@ public abstract class Entity {
 		this.y = y;
 	}
 
+	/**
+	 * @return width of the entity in pixels
+	 */
 	public int getWidth() {
 		return width;
 	}
@@ -48,6 +70,9 @@ public abstract class Entity {
 		this.width = width;
 	}
 
+	/**
+	 * @return height of the entity in pixels
+	 */
 	public int getHeight() {
 		return height;
 	}
@@ -56,13 +81,23 @@ public abstract class Entity {
 		this.height = height;
 	}
 	
+	//Returns rectangle over entity
+	/**
+	 * @param xOff screen offset at x coordinate
+	 * @param yOff screen offset at y coordinate
+	 * @return rectangle with area around the entity
+	 */
 	public Rectangle getCollisionBounds(float xOff, float yOff) {
-		//returns rectangle with area around the entity
 		return new Rectangle ((int)(x + bounds.x + xOff), (int)(y + bounds.y + yOff),bounds.width, bounds.height);
 		
 	}
 	
-	//Check for collision with entity
+	/**
+	 * Checks for collision with entity
+	 * @param xOff screen offset at x coordinate
+	 * @param yOff screen offset at y coordinate
+	 * @return stops on collision 
+	 */
 	public boolean collision(float xOff, float yOff) {
 		for(Entity e : handler.getEnvironment().getEntityManager().getEntities()) {
 			if(e.equals(this))

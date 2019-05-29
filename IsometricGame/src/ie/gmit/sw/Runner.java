@@ -2,21 +2,18 @@ package ie.gmit.sw;
 
 import ie.gmit.sw.view.GameView;
 
+/**
+ * Takes a gameView object and starts run method using thread which runs a game.
+ * 
+ * @author Kamila Michel
+ * 
+ */
 public class Runner {
+	/**
+	 * @param args Returns game screen with specified size and title.
+	 */
 	public static void main(String[] args) {
-		/*
-		 * //Can read in necessary information here and process it before going any
-		 * further... //Never run a GUI in the same thread as the main method... This is
-		 * asynchronous: //javax.swing.SwingUtilities.invokeLater(new Runnable() {
-		 * public void run() { //Template method.... try { /*
-		 * ---------------------------------------- Control Keys
-		 * ---------------------------------------- Use the arrow keys to move the
-		 * player. Move Player: 'X' Toggle View: 'Z'
-		 * ----------------------------------------
-		 * 
-		 * new GameWindow(); //Could be done nicer? } catch (Exception e) {
-		 * e.printStackTrace(); //Real lazy stuff here... } } }); }
-		 */
+
 		GameView gameView = new GameView("GMIT - B.Sc. in Computing (Software Development)", 1280, 640);
 		gameView.start();
 	}

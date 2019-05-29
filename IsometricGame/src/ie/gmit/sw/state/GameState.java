@@ -5,13 +5,20 @@ import java.awt.Graphics;
 import ie.gmit.sw.Handler;
 import ie.gmit.sw.environment.Environment;
 
+/**
+ * Utilise a State class and returns environment from txt file with specified
+ * path.
+ * 
+ * @author Kamilka
+ *
+ */
 public class GameState extends State {
 
-	// Declare variables
-	// private Player player;// Player object
 	private Environment environment;
 
-	// Constructor
+	/**
+	 * @param handler object
+	 */
 	public GameState(Handler handler) {
 		super(handler);
 		environment = new Environment(handler, "resources/environment/environment.txt");
@@ -20,7 +27,6 @@ public class GameState extends State {
 		// gameView.getCamera().move(50, 100);//Takes x,y offsets to move a camera
 	}
 
-	// Updates variables or objects
 	@Override
 	public void tick() {
 		environment.tick();

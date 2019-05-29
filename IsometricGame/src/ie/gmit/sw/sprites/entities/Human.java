@@ -3,7 +3,13 @@ package ie.gmit.sw.sprites.entities;
 import ie.gmit.sw.Handler;
 import ie.gmit.sw.tiles.Tile;
 
-//Collision detection 
+/**
+ * Returns position and size of a Human to the screen.
+ * Checks for collision using moving position and bounds.
+ * Human is no longer able to cross water tiles.
+ * @author Kamila Michel 
+ *
+ */
 public abstract class Human extends Entity {
 
 	// Declare variables
@@ -16,7 +22,13 @@ public abstract class Human extends Entity {
 	public static final int DEFAULT_HUMAN_WIDTH = 100;
 	public static final int DEFAULT_HUMAN_HEIGHT = 64;
 
-	// Human constructor that takes x,y position
+	/**
+	 * @param handler object
+	 * @param x axis position on the map
+	 * @param y axis position on the map
+	 * @param width of an entity in pixels
+	 * @param height of an entity in pixels
+	 */
 	public Human(Handler handler, float x, float y, int width, int height) {
 		super(handler, x, y, width, height);
 		health = DEFAULT_HEALTH;
@@ -33,8 +45,10 @@ public abstract class Human extends Entity {
 
 	}
 
-	// Collision detection
-	// Move only on x-axis
+	/**
+	 * Collision detection
+	 * Move only on x-axis
+	 */
 	public void moveX() {
 		// Player moving right
 		if (xMove > 0) {// Moving right
@@ -60,7 +74,11 @@ public abstract class Human extends Entity {
 		}
 	}
 
-	// Move only on y-axis
+	/**
+	 * Move only on y-axis
+	 * Calculates position to move on y-axis when collision is detected between
+	 * water tile and a player. player has to move then in different direction
+	 */
 	public void moveY() {
 		if (yMove < 0) {// Up
 			int ty = (int) (y + yMove + bounds.y) / Tile.TILE_HEIGHT;
@@ -85,10 +103,19 @@ public abstract class Human extends Entity {
 		}
 	}
 
+	/**
+	 * @return Human health
+	 */
 	public int getHealth() {
 		return health;
 	}
 
+	/**
+	 * Checks if the tile is walkable
+	 * @param x position on the map
+	 * @param y position on the map
+	 * @return water tile
+	 */
 	protected boolean collisionWithWater(int x, int y) {
 		return handler.getEnvironment().getTile(x, y).isSolid();
 	}
@@ -96,7 +123,10 @@ public abstract class Human extends Entity {
 	public void setHealth(int health) {
 		this.health = health;
 	}
-
+ 
+	/**
+	 * @return human speed
+	 */
 	public float getSpeed() {
 		return speed;
 	}
@@ -105,6 +135,9 @@ public abstract class Human extends Entity {
 		this.speed = speed;
 	}
 
+	/**
+	 * @return xMove moving position on x axis
+	 */
 	public float getxMove() {
 		return xMove;
 	}
@@ -113,6 +146,9 @@ public abstract class Human extends Entity {
 		this.xMove = xMove;
 	}
 
+	/**
+	 * @return yMove moving position on y axis
+	 */
 	public float getyMove() {
 		return yMove;
 	}

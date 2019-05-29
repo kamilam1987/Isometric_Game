@@ -2,11 +2,16 @@ package ie.gmit.sw.view;
 
 import java.awt.*;
 import javax.swing.*;
+
+/**
+ * Uses Jframe to display a window with given title, width and height.
+ * Game is painted on canvas object with defined dimensions for width and height.
+ * Graphics is drawn to the canvas element. Jframe is used to display the canvas.
+ * @author Kamila
+ *
+ */
 public class GameWindow {
-	/*
-	 * This matrix represents the isometric game model, with each number mapping to an
-	 * image in the images/ground/ directory.
-	 */
+	
 	/*private int[][] model = { 
 			{ 1, 0, 0, 0, 0, 0 , 0, 0, 0, 2},
 			{ 0, 1, 0, 0, 0, 0 , 0, 0, 0, 2},
@@ -55,11 +60,12 @@ public class GameWindow {
 	}*/
 	
 	//Declare variables
-	private JFrame f;
-	private String title;
-	private int width, height;
-	private Canvas canvas;
+	private JFrame f;//JFrame object
+	private String title;// Game window title
+	private int width, height;// Game window height and width  in pixels
+	private Canvas canvas;//Canvas object
 	
+	//Passes given parameters and calls methods to display game view
 	public GameWindow(String title, int width, int height) {
 		this.title = title;
 		this.width = width;
@@ -68,6 +74,9 @@ public class GameWindow {
 		createGameWindow();
 	}
 
+	/**
+	 * Initialize Jframe and sets the title. Sets the with and height
+	 */
 	private void createGameWindow() {
 		f = new JFrame(title);
 		//f = new JFrame("GMIT - B.Sc. in Computing (Software Development)");
@@ -77,13 +86,14 @@ public class GameWindow {
 		f.setLocationRelativeTo(null);//Appears in the center of a screen
 		f.setVisible(true);
 		
+		//Sets size of canvas with with and height of a game
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width, height));
 		canvas.setMaximumSize(new Dimension(width, height));
 		canvas.setMinimumSize(new Dimension(width, height));
 		canvas.setFocusable(false);
-		f.add(canvas);
-		f.pack(); //Resize the window
+		f.add(canvas);//Adds canvas to a Jframe
+		f.pack(); //Resize the window to see window fully
 
 	}
 
